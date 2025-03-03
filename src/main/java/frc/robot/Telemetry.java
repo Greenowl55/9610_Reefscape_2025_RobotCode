@@ -96,14 +96,24 @@ public class Telemetry {
         m_poseArray[0] = state.Pose.getX();
         m_poseArray[1] = state.Pose.getY();
         m_poseArray[2] = state.Pose.getRotation().getDegrees();
+
         for (int i = 0; i < 4; ++i) {
             m_moduleStatesArray[i*2 + 0] = state.ModuleStates[i].angle.getRadians();
             m_moduleStatesArray[i*2 + 1] = state.ModuleStates[i].speedMetersPerSecond;
             m_moduleTargetsArray[i*2 + 0] = state.ModuleTargets[i].angle.getRadians();
             m_moduleTargetsArray[i*2 + 1] = state.ModuleTargets[i].speedMetersPerSecond;
         }
+        SmartDashboard.putNumber("1-Steer speed (m/s):", state.ModuleStates[0].speedMetersPerSecond);
+        SmartDashboard.putNumber("2-Steer speed (m/s):", state.ModuleStates[1].speedMetersPerSecond);
+        SmartDashboard.putNumber("3-Steer speed (m/s):", state.ModuleStates[2].speedMetersPerSecond);
+        SmartDashboard.putNumber("4-Steer speed (m/s):", state.ModuleStates[3].speedMetersPerSecond);
 
-        SignalLogger.writeDoubleArray("DriveState/Pose", m_poseArray);
+        SmartDashboard.putNumber("1-Cancoder offset:", state.ModuleStates[0].angle.getDegrees());
+        SmartDashboard.putNumber("2-Cancoder offset:", state.ModuleStates[1].angle.getDegrees());
+        SmartDashboard.putNumber("3-Cancoder offset:", state.ModuleStates[2].angle.getDegrees());
+        SmartDashboard.putNumber("4-Cancoder offset:", state.ModuleStates[3].angle.getDegrees());
+
+        SignalLogger.writeDoubleArray("Driv eState/Pose", m_poseArray);
         SignalLogger.writeDoubleArray("DriveState/ModuleStates", m_moduleStatesArray);
         SignalLogger.writeDoubleArray("DriveState/ModuleTargets", m_moduleTargetsArray);
         SignalLogger.writeDouble("DriveState/OdometryPeriod", state.OdometryPeriod, "seconds");
