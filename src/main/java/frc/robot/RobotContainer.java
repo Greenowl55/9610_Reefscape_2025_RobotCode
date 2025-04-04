@@ -37,16 +37,17 @@ public class RobotContainer {
 
     private final CommandXboxController joystick = new CommandXboxController(0);
 
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public final CommandSwerveDrivetrain drivetrain;
 
     private final SendableChooser<Command> autoChooser;
     public RobotContainer() {
+        drivetrain = TunerConstants.createDrivetrain();
         configureBindings();
         autoChooser = 
         AutoBuilder.buildAutoChooser("drive");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
-        autoChooser.setDefaultOption("Drive", new PrintCommand("Drive"));
+        autoChooser.setDefaultOption("drive", new PrintCommand("drive"));
     }
 
     private void configureBindings() {
